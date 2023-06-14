@@ -22,6 +22,7 @@ class Bus_Reservation
  
 public:
   void add_bus();
+  void reserve_bus();
 }
   
 bus[10];
@@ -58,3 +59,45 @@ void Bus_Reservation::add_bus()
  else
  	cout<<"Enter the correct pin";
 	 }
+
+void Bus_Reservation::reserve_bus()
+{
+  int seat;
+  char number[5];
+  top:
+  cout<<"Bus number: ";
+  cin>>number;
+  int n;
+  for(n=0;n<=p;n++)
+  {
+    if(strcmp(bus[n].busn, number)==0)
+    break;
+  }
+  while(n<=p)
+  {
+    cout<<"\nSeat Number: ";
+    cin>>seat;
+    if(seat>32)
+    {
+      cout<<"\nThere are only 32 seats available in this bus.";
+    }
+    else
+    {
+      if (strcmp(bus[n].seat[seat/4][(seat%4)-1], "Empty")==0)
+      {
+        cout<<"Enter passanger's name: ";
+        cin>>bus[n].seat[seat/4][(seat%4)-1];
+        break;
+      }
+    else
+      cout<<"The seat no. is already reserved.\n";
+      }
+      }
+    if(n>p)
+    {
+      cout<<"Enter correct bus no.\n";
+      goto top;
+    }
+    cout<<"\n Added Successfully....";
+	getch();
+  }
