@@ -101,3 +101,54 @@ void Bus_Reservation::reserve_bus()
     cout<<"\n Added Successfully....";
 	getch();
   }
+void Bus_Reservation::empty()
+{
+  for(int i=0; i<8;i++)
+  {
+    for(int j=0;j<4;j++)
+    {
+      strcpy(bus[p].seat[i][j], "Empty");
+    }
+  }
+}
+ 
+void Bus_Reservation::show_bus()
+{
+  int n;
+  char number[5];
+  cout<<"Enter bus number: ";
+  cin>>number;
+  for(n=0;n<=p;n++)
+  {
+    if(strcmp(bus[n].busn, number)==0)
+    break;
+  }
+  while(n<=p)
+  {
+  	cout<<"\n========================================\n";
+  	cout<<"Bus no: "<<bus[n].busn
+  	<<"\nDriver: "<<bus[n].driver<<"\nArrival time: "
+  	<<bus[n].arrival<<"\nDeparture time: "<<bus[n].depart
+  	<<"\nFrom: "<<bus[n].from<<"\nTo: "<<
+  	bus[n].to<<"\n";
+  	cout<<"\n========================================\n";
+  	bus[0].position(n);
+  
+  	int a=1;
+  	for (int i=0; i<8; i++)
+  	{
+    	for(int j=0;j<4;j++)
+    	{
+      	a++;
+      	if(strcmp(bus[n].seat[i][j],"Empty")!=0)
+      	cout<<"\nThe seat no "<<(a-1)<<" is reserved for "<<bus[n].seat[i][j]<<".";
+    	}
+  	}
+  	break;
+  	}
+  	if(n>p)
+    	cout<<"Enter correct bus no: ";
+    	
+  	getch();
+}
+
