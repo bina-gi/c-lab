@@ -23,17 +23,19 @@ class Bus_Reservation
 public:
   void add_bus();
   void reserve_bus();
+  void empty();
+  void show_bus();
+  void is_bus_available();
+  void position(int i);
 }
   
 bus[10];
 
 void Bus_Reservation::add_bus()
-
-
 {
-	 cout<<"enter pin\t";
-	 cin>>pin;
-	 if(pin==12345678){
+cout<<"enter pin\t";
+cin>>pin;
+if(pin==12345678){
   cout<<"Enter bus number: ";
   cin>>bus[p].busn;
  
@@ -53,11 +55,9 @@ void Bus_Reservation::add_bus()
   cin>>bus[p].to;
   
    cout<<"\n Added Successfully";
-
- 
 }
  else
- 	cout<<"Enter the correct pin";
+ 	cout<<"INCORRECT PIN try again";
 	 }
 
 void Bus_Reservation::reserve_bus()
@@ -151,4 +151,86 @@ void Bus_Reservation::show_bus()
     	
   	getch();
 }
+void Bus_Reservation::position(int l)
+{
+  int s=0;p=0;
+  for (int i =0; i<8;i++)
+  {
+    cout<<"\n";
+    for (int j = 0;j<4; j++)
+    {
+      s++;
+      if(strcmp(bus[l].seat[i][j], "Empty")==0)
+        {
+          cout.width(5);
+          cout.fill(' ');
+          cout<<s<<".";
+          cout.width(10);
+          cout.fill(' ');
+          cout<<bus[l].seat[i][j];
+          p++;
+        }
+        else
+        {
+        cout.width(5);
+        cout.fill(' ');
+        cout<<s<<".";
+        cout.width(10);
+        cout.fill(' ');
+        cout<<bus[l].seat[i][j];
+        }
+      }
+    }
+    cout<<"\n\nThere are "<<p<<" seats empty in Bus Number: "<<bus[l].busn;
+  }
+ 
+void Bus_Reservation::is_bus_available()
+{
+  for(int n=0;n<p;n++)
+  {
+  		cout<<"\n========================================\n";
+    	cout<<"Bus number: "<<bus[n].busn<<"\nDriver: "<<bus[n].driver
+    	<<"\nArrival time: "<<bus[n].arrival<<"\nDeparture Time: "
+    	<<bus[n].depart<<"\nFrom: "<<bus[n].from<<"\nTo: "
+    	<<bus[n].to;
+    	cout<<"\n========================================\n";
+  }
+getch();
+}
+ 
+int main()
+{
+system("cls");
+int w;
+while(1)
+{
+system("cls");
+    intro();
+ 
+  cout<<"\n";
+  cout<<"\t\t\t========================================\n";
+  cout<<"\t\t\t1. Add Bus\n\t\t\t"
+  <<"2. Reservation\n\t\t\t"
+  <<"3. Show Bus\n\t\t\t"
+  <<"4. Buses Available \n\t\t\t"
+  <<"5. Exit";
+  cout<<"\n\t\t\t========================================\n";
+  cout<<"\n\t\t\tEnter your choice:-> ";
+  cin>>w;
+  switch(w)
+  {
+    case 1:  bus[p].add_bus();
+      break;
+    case 2:  bus[p].reserve_bus();
+      break;
+    case 3:  bus[0].show_bus();
+      break;
+    case 4:  bus[0].is_bus_available();
+      break;
+    case 5:  exit(0);
+  }
+}
+return 0;
+}
+ 
 
